@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+        const deobfuscate = (input) => {
+            try{
+                var name=input.match(/var _0x[0-9A-F]*/i)[0].split(" ")[1],
+                    input=require("js-beautify")(input,{indent_size: 2,space_in_empty_paren: true}),
+                    array=eval(input.replace(/\r/gi, "").split("\n")[0]+name),
+                    count=0;
+                array.forEach(value => {
+                    input=input.replace(new RegExp(name+"\\["+count+"\\]","gi"),"\""+value+"\"")
+                    count++
+                })
+                input.match(/[\w]*\[\"[\w]*\"\]/gi).forEach(value => {
+                    input=input.replace(value,value.replace("[\"",".").split("").reverse().join("").replace("]\"","").split("").reverse().join(""))
+                })
+                input=input.replace(/\r/gi, "").split("\n").slice(1).join("\n")
+                document.getElementById("output").value = input
+            }catch{
+                document.getElementById("output").value = "An error has occurred"
+            }
+        }
+    </script>
+    <title>Array Deobfuscator</title>
+</head>
+<body>
+    <center>
+        <span>
+            <h1>Array Deobfuscator</h1>
+            <textarea cols=140 id=input rows=9 placeholder='var _0x733a=["\x53\x61\x79\x48\x65\x6C\x6C\x6F", "\x47\x65\x74\x43\x6F\x75\x6E\x74","\x4D\x65\x73\x73\x61\x67\x65\x20\x3A\x20", "\x59\x6F\x75\x20\x61\x72\x65'></textarea></br>
+            <button id=button onclick="deobfuscate(document.getElementById('input').value)">Deobfuscate !</button></br>
+            <textarea cols=140 id=output readonly rows=9></textarea>
+        </span>
+    </center>
+</body>
+</html>
