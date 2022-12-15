@@ -13,7 +13,7 @@ this obfuscation is also based on the fact that in JavaScript you can also write
 ```js
 console["log"]("hello")
 ```
-, that adds one more string to add in the array, and finally this obfuscation uses a low level value protection (hexadecimal encoding of the values in the array : "\x48\x65\x6C\x6F") to get to the point : 
+, that adds one more string to add in the array, and finally this obfuscation uses a low level value protection (hexadecimal encoding of the values in the array : `"\x48\x65\x6C\x6F"`) to get to the point : 
 original program : 
 ```js
 console.log("hello");
@@ -23,7 +23,7 @@ obfuscated program :
 var _0xf476=["\x48\x65\x6C\x6C\x6F","\x6C\x6F\x67"];
 console[_0xf476[1]](_0xf476[0]);
 ```
-to unobfuscate this you just have to get the array _0xf476 and then display all the values and replace them, for example 
+to unobfuscate this you just have to get the array `_0xf476` and then display all the values and replace them, for example 
 ```js
 _0xf476[1]="\x6C\x6F\x67"="log"
 ```
