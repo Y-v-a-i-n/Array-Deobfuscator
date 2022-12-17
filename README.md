@@ -37,7 +37,7 @@ console["log"]("Hello");
 ```
 you can make the code look a bit nicer by replacing 
 ```js
-onsole["log"]
+console["log"]
 ```
 with
 ```js
